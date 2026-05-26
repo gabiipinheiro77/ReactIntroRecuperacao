@@ -1,15 +1,37 @@
 import { Link } from "react-router-dom";
 import './style.css'
+import { useEffect, useState } from "react";
+import { getCharacters } from "../../api/rickAndMorty";
+import Card from "../../components/Card";
 
-function Home () {
+function Home() {
+    const [carregando, setCarregando] = useState(true);
+    const [personagens, setPersonagens] = useState([]);
+
+    useEffect(() => {
+        async function carregar() {
+            const dados = await  getCharacters()
+            setPersonagens(dados)
+            setCarregando(false)
+        }
+
+        carregar()
+
+    }, [])
+    if (carregando) {
+        return (<> CARREGANDO ... </>
+        )
+    }
     return (
         <>
-        <h1>Boas-Vindas</h1>
-        <h3>A página tem duas abas uma de Operações e uma de um local do mundo que no caso o escolhido foi Dubai</h3>
-        <h2>Locais do mundo</h2>
-        <h3>Uma breve descrição sobre 3 Cidades muito famosas </h3>
-        <h2>Operações</h2>
-        <h3>Uma calculadora simples que executa apenas a Soma,Subtração,Multiplicação e a Divisão de dois numeros apenas!!</h3>
+            <div className='home page'>
+                <h2 className='titulo-lista'>Personagens - Rick and Morty</h2>
+                <div className='lista-personagens'>
+                    {personagens.map((personagem) => (
+                        <Card personagem = {personagem}/>
+                    ))}
+                </div>
+            </div>
         </>
     )
 

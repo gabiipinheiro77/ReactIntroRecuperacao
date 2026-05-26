@@ -8,12 +8,6 @@ function Header() {
          <Link to='/'>
                     <button>Home</button>
                 </Link>
-                <Link to='/Operacoes'>
-                    <button>Operações</button>
-                    </Link>
-                    <Link to='/LocaisDMundo'>
-                    <button>Locais do Mundo</button>
-                </Link>
         </>
     )
 }
